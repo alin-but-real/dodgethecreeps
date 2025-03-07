@@ -3,6 +3,9 @@ extends Node2D
 @export var mob_scene: PackedScene #lets us drag the mob scene  into here. var (name): (type of value)
 var score
 
+func _ready():
+	new_game()
+
 func game_over() -> void:
 	$ScoreTimer.stop()
 	$MobTimer.stop()
@@ -11,8 +14,6 @@ func new_game():
 	score = 0
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
-
-
 
 func _on_mob_timer_timeout() -> void:
 	var mob = mob_scene.instantiate()
