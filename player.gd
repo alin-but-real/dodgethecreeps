@@ -41,10 +41,7 @@ func _process(delta): #runs every frame
 		$AnimatedSprite2D.animation = "up"
 		$AnimatedSprite2D.flip_v = velocity.y > 0
 
-
-
 func _on_body_entered(body: Node2D) -> void:
-	print_debug("piss")
 	hide()
 	hit.emit()
-	$CollisionShape2D.set_deferred("disabled", true)
+	$CollisionShape2D.set_deferred("disabled",true)
