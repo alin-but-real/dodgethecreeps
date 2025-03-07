@@ -6,3 +6,5 @@
 
 [node name="Player" parent="." instance=ExtResource("1_ig7tw")]
 position = Vector2(154, 109)
+
+[connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]
