@@ -9,16 +9,16 @@ func _ready(): #runs once at startup
 func _process(delta): #runs every frame
 	var velocity = Vector2.ZERO #player movement vector, reset to zero initially before frame changes it
 	if Input.is_action_pressed("move_up"):
-		velocity.y += 1
-	if Input.is_action_pressed("move_down"):
 		velocity.y -= 1
+	if Input.is_action_pressed("move_down"):
+		velocity.y += 1
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
 	if Input.is_action_pressed("move_left"):
 		velocity.x -= 1
 	
 	if velocity.length() > 0:
-		velocity = velocity.normalized * speed #if player moving diagonally, normalize the vector then times it by speed
+		velocity = velocity.normalized() * speed #if player moving diagonally, normalize the vector then times it by speed
 		$AnimatedSprite2D.play() # $ = get_node()
 	else:
 		$AnimatedSprite2D.stop()
