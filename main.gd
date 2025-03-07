@@ -3,17 +3,24 @@ extends Node2D
 @export var mob_scene: PackedScene #lets us drag the mob scene  into here. var (name): (type of value)
 var score
 
-func _ready():
-	new_game()
+#func _ready():
+	#new_game()
 
 func game_over() -> void:
 	$ScoreTimer.stop()
 	$MobTimer.stop()
+	$HUD.show_itsjoever()
+	$Music.stop()
+	$Deathsound.play()
 
 func new_game():
 	score = 0
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
+	$HUD.update_score(score)
+	$HUD.show_message("get redy")
+	get_tree().call_group("mobs", "queue_free")
+	$Music.play()
 
 func _on_mob_timer_timeout() -> void:
 	var mob = mob_scene.instantiate()
@@ -30,8 +37,12 @@ func _on_mob_timer_timeout() -> void:
 
 func _on_score_timer_timeout() -> void:
 	score += 1
+	$HUD.update_score(score)
 
 
 func _on_start_timer_timeout() -> void:
 	$MobTimer.start()
 	$ScoreTimer.start()
+
+func _on_hud_start_game() -> void:
+	new_game()
